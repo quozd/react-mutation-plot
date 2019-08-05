@@ -7,8 +7,6 @@ import Domain, {domainSpec} from './components/Domain'
 import SVGAxis from './components/SVGAxis'
 import Tooltip from './components/Tooltip'
 import Legend from './components/Legend'
-import {jsPDF as JsPDF} from 'jspdf-yworks'
-import svg2pdf from 'svg2pdf.js'
 
 const LOLLIPOP_ID_CLASS_PREFIX = 'lollipop-'
 const DOMAIN_ID_CLASS_PREFIX = 'domain-'
@@ -208,22 +206,6 @@ class LollipopPlot extends React.Component {
   }
 
   handleDownloadAsPNG = (hugoGeneSymbol) => {
-    const svgElement = document.getElementById('lollipop-svgnode')
-    const width = this.svgWidth() + 200
-    const height = this.svgHeight()
-    const suffix = 'lollipop.pdf'
-    const fileName = hugoGeneSymbol ? `${hugoGeneSymbol}-${suffix}` : suffix
-
-    // create a new jsPDF instance
-    const pdf = new JsPDF('l', 'pt', [width, height])
-    // render the svg element
-    svg2pdf(svgElement, pdf, {
-      xOffset: 0,
-      yOffset: 0,
-      scale: 1
-    })
-    // or simply save the created pdf
-    pdf.save(`${fileName}`)
   }
 
   renderLegend = (options, domains) => {
